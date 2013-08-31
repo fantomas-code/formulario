@@ -1,32 +1,34 @@
 <?php
-// formulario de contacto papirrin,lo puedes mejorar? hazlo, no me enojo!!!!
+// formulario de contacto papirrin,si pudes aportar algo seras bienvenido.
+// le hice unas pequeñas mejoras....******
 	require 'class.phpmailer.php';
-	// variables que almacenan los campos a enviar
-	$nombre  = strip_tags($_POST['nombre']);
-	$correo    = strip_tags($_POST['correo']);
-       $mensaje = strip_tags($_POST['mensaje']);
-
-	$destino = "ejemplo@dominio.com"; // variable que almacena el correo al q se le envia el comentario
-	$asunto  = "Enviado desde (lo que quieras poner)"; // variable que almacena desde donde se envia el comentario
-
-	$cuerpo = "Nombre:  ".$nombre."\r\n". 
-	                    "Correo:  ".$correo."\r\n".
-			      "Mensaje:  ".$mensaje;
-	// variable que almacena todas las variables de los campos..
-
-      $mail = new PHPMailer();
-
-      $mail->CharSet = "UTF-8";   // variables que no puedes omitir
-      $mail->From =   $asunto;   // variables que no puedes omitir
-      $mail->AddAddress($destino);   // variables que no puedes omitir
-      $mail->AddCC ($correo);   // variables que puedes omitir
-      $mail->WordWrap = 55;   // variables que no puedes omitir
-      $mail->MsgHTML= $cuerpo;   // variables que no puedes omitir
-      $mail->Body = $cuerpo;   // variables que no puedes omitir
-      
+			   
 	if($_POST)
 	{
-		require 'funciones.php';								
+		require 'funciones.php';	
+
+		// variable que almacena el correo al q se le envia el comentario
+		$destino   = "usuario@dominio.com";
+		$asunto    = "aqui va el titulo de tu pagina web sin caracteres raros";
+
+		$nombre  = strip_tags($_POST['nombre']);
+		$correo     = strip_tags($_POST['correo']);
+		$mensaje = strip_tags($_POST['mensaje']);
+
+		// variable que almacena todas las variables de los campos..
+		$cuerpo    = "Nombre: $nombre \nCorreo: $correo \nMensaje: $mensaje";
+
+		$mail = new PHPMailer();
+
+		$mail->CharSet = 'UTF-8';// variables que no puedes omitir
+		$mail->AddAddress($destino);// variables que no puedes omitir
+		$mail->AddCC ($correo);   // variables que  puedes omitir si quieres
+		$mail->SetFrom = $correo;// variables que no puedes omitir
+		$mail->FromName = $asunto;// variables que no puedes omitir
+		$mail->Body = $cuerpo; // variables que no puedes omitir
+		$mail->Subject = "aqui puedes poner desde donde se envia el comentario o mensaje"; // variables que no puedes omitir
+		$mail->WordWrap = 50;// variables que no puedes omitir
+
 		if (valnombre($nombre)=="") 
 		{
 			// variable que te informa sobre posible error
@@ -51,7 +53,7 @@
        }
 ?>
 		<form action="" method="POST" enctype="a pplication/x-www-form-urlencoded">
-		    <p>Enviame tus comentarios</p><br>
+		    <p>Aqui puedes ponerle el titulo que quieras</p><br>
 		    <label for="nombre">Nombre :</label><br>
 		    <input type="text" name="nombre" id="nombre" value="<?php echo htmlspecialchars($nombre);?>"/>
 		    <span class="msg">*  <?php echo $mn;?></span> <!--  Aqui se recojen las variables que te informan sobre los errores que puedes tener al no cumplir con los datos requeridos-->
