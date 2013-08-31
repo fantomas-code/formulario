@@ -1,6 +1,6 @@
 <?php
 // formulario de contacto papirrin,si pudes aportar algo seras bienvenido.
-// le hice unas pequeñas mejoras....******
+// le hice unas pequeñas mejoras     ....****** llega mas rapido al destinatario
 	require 'class.phpmailer.php';
 			   
 	if($_POST)
